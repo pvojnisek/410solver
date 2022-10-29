@@ -1,3 +1,4 @@
+from curses import meta
 import sys
 from typing import Tuple
 from solver import NoSolutionException, solve
@@ -5,17 +6,37 @@ import argparse
 
 
 def parse_arguments() -> Tuple[int, int, int, int]:
-    parser = argparse.ArgumentParser(description='Solver for 4=10 game')
+    parser = argparse.ArgumentParser(
+        prog='Solver for 4=10 game',
+        description='You can download the game from play store for Android.',
+        epilog='Please use this utility only when you stuck. Using it too much can harm the gaming experience.'
+    )
     parser.add_argument(
-        'numbers',
+        '--numbers',
         nargs=4,
         metavar='number',
         type=int,
         help='Add 4 numbers to solve the problem.'
     )
 
+    parser.add_argument(
+        '--shortnumbers',
+        nargs=1,
+        # metavar('shortnumber'),
+        type=int,
+        help='define numbers without spaces. Example: abcd'
+    )
+
     args = parser.parse_args()
-    return args.numbers
+    print('===>', args)
+    if args.shortnumbers:
+        return [int(x) for x in str(args.shortnumbers[0])]
+    elif args.numbers:
+        return args.numbers
+    else:
+        raise NotImplementedError('Argument is not implemented: '+str(args))
+
+    return args.numbers if args.numbers else [int(x) for x in str(args.shortnumbers[0])]
 
 
 def main():
