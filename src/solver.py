@@ -46,12 +46,16 @@ class NoSolutionException(Exception):
     '''Raised when no solution found.'''
 
 
-def solve(numbers: list) -> list:
+def solve(numbers: list, return_all_solutions: bool = False) -> list:
     '''Solves the puzzle.. :)'''
+    solutions = list()
     for calculation in generate_calculations(numbers):
         try:
             if 10 == calculate(calculation.copy()):
-                return calculation
+                if return_all_solutions:
+                    solutions.append(calculation)
+                else:
+                    return [calculation]
         except ZeroDivisionError:
             pass
-    raise NoSolutionException()
+    return solutions

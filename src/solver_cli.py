@@ -43,12 +43,11 @@ def main():
     numbers = parse_arguments()
     print('4=10 solver!')
     print('The problem is: ', numbers)
-    try:
-        solution = solve(numbers)
-    except NoSolutionException:
-        print('Unfortunatelly there is no solution for this problem!')
-        sys.exit()
-    print('And the solution is: ', ' '.join([str(x) for x in solution]))
+    solutions = solve(numbers, return_all_solutions=True)
+    print(f'Number of solutions: {len(solutions)}')
+    print('And the solution(s):')
+    for sol in solutions:
+        print(' '.join([str(x) for x in sol]))
 
 
 if __name__ == "__main__":
