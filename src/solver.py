@@ -22,11 +22,11 @@ bracket_positions = [
 ]
 
 
-def assemble_calculation(numbers: list, ops: list, brackets: tuple) -> list:
+def assemble_calculation(numbers: list, operations: list, brackets: tuple) -> list:
     '''Assembles the calculation from the list of numbers and operators.'''
     calculation = [numbers[0]]
-    for i, op in enumerate(ops):
-        calculation.append(op)
+    for i, operation in enumerate(operations):
+        calculation.append(operation)
         calculation.append(numbers[i+1])
     if brackets != (0, 0):
         calculation.insert(brackets[1]+1, ')')
@@ -40,10 +40,6 @@ def generate_calculations(numbers: list) -> Generator:
         for ops in operatorlist:
             for brackets in bracket_positions:
                 yield assemble_calculation(nums, ops, brackets)
-
-
-class NoSolutionException(Exception):
-    '''Raised when no solution found.'''
 
 
 def solve(numbers: list, return_all_solutions: bool = False) -> list:

@@ -1,8 +1,6 @@
-from curses import meta
-import sys
-from typing import Tuple
-from solver import NoSolutionException, solve
 import argparse
+from typing import Tuple
+from solver import solve
 
 
 def parse_arguments() -> Tuple[int, int, int, int]:
