@@ -22,7 +22,7 @@ async def webservice(
         resval = []
         for l in lst:
             resval.append(' '.join([str(x) for x in l]))
-        return set(resval)
+        return sorted(set(resval))
 
     try:
         int(numbers)
@@ -32,9 +32,10 @@ async def webservice(
     if len(numbers) != 4:
         return {"status": "Error", "message": "Parameters has to be a four digit number!"}
 
-    results = solve([int(num) for num in numbers], return_all_solutions=True)
+    results = convert_to_listof_stings(solve([int(num) for num in numbers], return_all_solutions=True))
     return {
         "status": "OK",
         "numbers": numbers,
-        "results": convert_to_listof_stings(results)
+        "number_of_solutions": len(results),
+        "results": results
     }

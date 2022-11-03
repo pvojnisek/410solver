@@ -1,18 +1,54 @@
 <html>
 
 <head>
+    <title>4=10 solver</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
     <script src="js/htmx.min.js"></script>
+    <script src="js/client-side-templates.js"></script>
+    <script src="js/nunjucks.js"></script>
+    <!--<script src="https://unpkg.com/htmx.org@1.6.1"></script>-->
+    <!--<script src="https://unpkg.com/htmx.org@1.6.1/dist/ext/client-side-templates.js"></script>-->
+    <!--<script src="https://mozilla.github.io/nunjucks/files/nunjucks.js"></script>-->
 </head>
 
 <body>
-    <form hx-post="/webservice" hx-target="#results">
-        <input name="numbers" id="numbers" />
-        <button type="submit">Calculate!</button>
-    </form>
-</body>
+    <h1>4=10 solver</h1>
+    <div class="description">
+        <p>
+            This utility helps you to solve the <a href="https://play.google.com/store/apps/details?id=app.fourequalsten.fourequalsten_app">4=10 puzzle game found on Google Play</a> and on <a href="https://apps.apple.com/us/app/4-10/id1609871477">Apple Store</a>.
+        </p>
+        <p>
+            Special thanks to the developer: Sveinn Steinarsson
+        </p>
+        <p>
+            The 4=10 solver is opensource. It can be found on <a href="https://github.com/pvojnisek/410solver">GitHub</a>.
+        </p>
+    </div>
+    <div hx-ext="client-side-templates">
 
-<ul id="results">
-    <li>please add the numbers</li>
-</ul>
+        <form hx-post="/webservice" hx-target="#results" nunjucks-template="results_template">
+            <input name="numbers" id="numbers" />
+            <button type="submit">Calculate!</button>
+        </form>
+
+        <ul id="results">
+            <li>please add the numbers</li>
+        </ul>
+
+        <template id="results_template">
+            <h2>Numbers to solve: {{numbers}}</h2>
+            <p>Number of solutions <b>{{number_of_solutions}}</b></p>
+            {% for res in results %}
+            <li>
+                {{res}}
+            </li>
+            {% endfor %}
+        </template>
+
+    </div>
+
+</body>
 
 </html>
