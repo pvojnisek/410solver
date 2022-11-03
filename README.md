@@ -2,7 +2,7 @@
 
 This little utility solves the [popular game](https://play.google.com/store/apps/details?id=app.fourequalsten.fourequalsten_app).
 
-## CLI version
+## CLI
 
 Usage:
 
@@ -21,7 +21,17 @@ Get help:
  python solver_cli.py -h
  ```
 
-## Web API
+## Web GUI
+
+Start the server
+ ```
+uvicorn solver_webapp:app
+```
+
+Open your browser. The URL is: http://localhost:8000/webapp/index.html
+
+
+## Rest API
 
 Start the server
  ```
@@ -30,14 +40,13 @@ uvicorn solver_webapp:app
 
 The webserver runs at the ```:8000``` port by default. The documentation and testing page is here: [http://localhost:8000/docs#](http://localhost:8000/docs)
 
-Example call: http://localhost:8000/?numbers=1234
-
-Return value in json format:
+Return value is in json format:
 
 ```
 {
     "status":"OK",
     "numbers":"1234",
+    "number_of_solutions":380
     "results":[   
         "1 + 2 + 3 + 4",
         "( 1 + 2 ) + 3 + 4",
