@@ -16,7 +16,7 @@ app.mount("/static", StaticFiles(directory="../files"), name="webapp_files")
 #app.mount("/webapp", StaticFiles(directory="../files"), name="webapp_files")
 
 
-@app.post("/webservice")
+@app.post("/api")
 async def webservice(
     numbers: str = Form()
 ):

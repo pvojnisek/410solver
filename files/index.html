@@ -38,7 +38,7 @@
     </div>
     <div hx-ext="client-side-templates" class="container text-center">
 
-        <form hx-post="/webservice" hx-target="#results" nunjucks-template="results_template">
+        <form hx-post="/api" hx-target="#results" nunjucks-template="results_template">
             <input name="numbers" id="numbers" />
             <button type="submit">Calculate!</button>
         </form>
