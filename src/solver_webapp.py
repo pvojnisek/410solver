@@ -3,18 +3,21 @@
     Webapp interface for 4=10 solver.
 
 '''
+from http.client import HTTPException
 from fastapi import FastAPI, Form
-from solver import solve
 from fastapi.staticfiles import StaticFiles
+from solver import solve
 
 app = FastAPI()
 
-app.mount("/webapp", StaticFiles(directory="../files"), name="webapp_files")
+
+app.mount("/static", StaticFiles(directory="../files"), name="webapp_files")
+#app.mount("/", StaticFiles(directory="../files"), name="webapp_files")
+#app.mount("/webapp", StaticFiles(directory="../files"), name="webapp_files")
 
 
 @app.post("/webservice")
 async def webservice(
-    #    numbers: str = Query('4 letters long string: 4 numbers', min_length=4, max_length=4)
     numbers: str = Form()
 ):
 
@@ -26,9 +29,9 @@ async def webservice(
 
     try:
         int(numbers)
-    except Exception as exception:
+    except ValueError as _:
+        #raise HTTPException(400, 'Parameter must be a number!') from e
         return {"status": "Error", "message": "Parameters has to be a number!"}
-#        raise HTTPException(400, 'Parameter must be a number!') from exception
     if len(numbers) != 4:
         return {"status": "Error", "message": "Parameters has to be a four digit number!"}
 
