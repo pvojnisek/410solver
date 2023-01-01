@@ -3,7 +3,7 @@
     Webapp interface for 4=10 solver.
 
 '''
-from http.client import HTTPException
+from starlette.responses import FileResponse
 from fastapi import FastAPI, Form
 from fastapi.staticfiles import StaticFiles
 from solver import solve
@@ -11,9 +11,13 @@ from solver import solve
 app = FastAPI()
 
 
-app.mount("/static", StaticFiles(directory="../files"), name="webapp_files")
-#app.mount("/", StaticFiles(directory="../files"), name="webapp_files")
-#app.mount("/webapp", StaticFiles(directory="../files"), name="webapp_files")
+# @app.route("/", defaults={"path": ""})
+@app.get("/")
+async def render_landing():
+    return FileResponse("../files/index.html")
+
+
+app.mount("/js", StaticFiles(directory="../files/js"), name="webapp_files")
 
 
 @app.post("/api")
