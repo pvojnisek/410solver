@@ -14,10 +14,10 @@ app = FastAPI()
 # @app.route("/", defaults={"path": ""})
 @app.get("/")
 async def render_landing():
-    return FileResponse("../files/index.html")
+    return FileResponse("files/index.html")
 
 
-app.mount("/js", StaticFiles(directory="../files/js"), name="webapp_files")
+app.mount("/js", StaticFiles(directory="files/js"), name="webapp_files")
 
 
 @app.post("/api")
