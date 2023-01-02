@@ -25,10 +25,10 @@ Get help:
 
 Start the server
  ```
-uvicorn solver_webapp:app
+uvicorn index:app
 ```
 
-Open your browser. The URL is: http://localhost:8000/webapp/index.html
+Open your browser. The URL is: http://localhost:8000/
 
 
 ## Rest API
